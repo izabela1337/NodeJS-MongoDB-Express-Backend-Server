@@ -1,0 +1,5 @@
+{
+    "ProjectName" : "NodeJS-MongoDB-Express-Backend-Server",
+    "Description" : "An backend server based on express node js library and mongoDB",
+    "Version" : "1.0.6"
+}

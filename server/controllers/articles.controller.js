@@ -35,7 +35,7 @@ exports.findAll = (req, res) => {
 };
 //Find one article by it's ID
 exports.findOne = (req, res) => {
-    let id = ID(req.params.ArticleID);
+    let id = Number(req.params.ArticleID);
     if(isNaN(id))
         id = 0;
     article.findOne({$query: {ID: parseInt(id)}}).then((result) =>{
@@ -46,16 +46,14 @@ exports.findOne = (req, res) => {
         });
     });
 };
-//Find multiple mangas (search)
+//Search articles
 exports.find = (req, res) => {
     let query = req.params.query;
     query = query.replace(/[\'\\\"\<\>]/g, '');
-    Mangas.find({$or: [{tags: {$in: query}}, 
+    article.find({$or: [{tags: {$in: query}}, 
         {title: {$in: query}}, 
-        {author: {$in: query}}, 
-        {characters: {$in: query}}, 
-        {series: {$in: query}}, 
-        {translator: {$in: query}}]})
+        {body: {$in: query}}    
+        ]})
         .then(result => {
             res.send(result);
         }).catch(err => {
@@ -63,28 +61,4 @@ exports.find = (req, res) => {
                 message: err.message
             });
         });
-}
-//Find part of an array (/manga)
-exports.findPart = (req, res) => {
-    let reqArr = [];
-    for(let i = 0; i < 6; i++){
-        reqArr.push(6 * (parseInt(req.params.pageNumber) - 1) + i + 1);
-    }
-    console.log(reqArr);
-    Mangas.find({$query: {number: {$in: reqArr}}}).then(result => {
-        res.send(result)
-    });
 };
-//Get icomming titles
-exports.getIncomming = (req, res) => {
-    let titlesInc = JSON.parse(fs.readFileSync('./server/meta/featured.json'))['titlesincoming'];
-    res.send(titlesInc)
-}
-//Random Dic Entry
-exports.getDic = (req, res) => {
-    let jData = JSON.parse(fs.readFileSync('./server/meta/dic.json'));
-    // let vals = Object.values(jData);
-    // console.log(jData.Dics[0]);
-    let randVal = jData.Dics[parseInt(Math.random() * Math.floor(9))];
-    res.send(randVal);
-}
