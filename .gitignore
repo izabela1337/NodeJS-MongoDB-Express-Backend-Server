@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+#Testing
+test/
+
+#that one motherfucking node_module (reader)
+!./client/node_modules/scarlet-reader/
