@@ -11,9 +11,10 @@ Prerequisites:
 - Installed MonoDB community ver > 4.4.1 (https://www.mongodb.com/try/download/community)  
 - Installed NodeJS ver > 12.19 (https://nodejs.org/en/download/)    
 - Any browser/http request client (ie. postman)  
-- restored db (found in /dbdump directory, restored used mongorestore tool)  
+- restored db (found in /dbdump directory, restored using mongorestore tool)  
 
 Running the app:  
+`npm install` - install required node_modules
 `npm run dev` in the /server directory - by default, app starts at port 5000  
 
 # Endpoints  
@@ -23,7 +24,7 @@ Running the app:
 - `/api/config` - info about server, can be changed by editing /config/meta.json  //  GET
 - `/api/licence` - licence, can be changed by editing /config/licence.json  //GET
 
-Articles:  
+## Articles:  
 - `/api/AddArticle` - add an article via POST request, by model as seen in the /models/article.model.js:  //POST
 ```javascript
     ID: Number,  
